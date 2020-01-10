@@ -1,0 +1,185 @@
+From fcc246ab0cad625f998d29031c4fa06d07d21eea Mon Sep 17 00:00:00 2001
+From: Richard Hughes <richard@hughsie.com>
+Date: Tue, 20 May 2014 14:04:51 +0100
+Subject: [PATCH 1/4] Do not crash when running the GMainLoop in
+ PkTransactionExtra
+
+There may be some deeper lifecycle issues of the parent object, but seeing as
+this has been replaced by a proper plugin runner in newer versions it's not
+worth thinking too hard about it. This fix has been tested and found to work.
+---
+ src/pk-transaction-extra.c | 16 ++++++++++++----
+ 1 file changed, 12 insertions(+), 4 deletions(-)
+
+diff --git a/src/pk-transaction-extra.c b/src/pk-transaction-extra.c
+index 0f7ff86..0945764 100644
+--- a/src/pk-transaction-extra.c
++++ b/src/pk-transaction-extra.c
+@@ -138,7 +138,9 @@ pk_transaction_extra_get_installed_package_for_file (PkTransactionExtra *extra,
+ 	g_strfreev (filenames);
+ 
+ 	/* wait for finished */
++	extra->priv->loop = g_main_loop_new (NULL, FALSE);
+ 	g_main_loop_run (extra->priv->loop);
++	g_main_loop_unref (extra->priv->loop);
+ 
+ 	/* check that we only matched one package */
+ 	if (extra->priv->list->len != 1) {
+@@ -511,7 +513,9 @@ pk_transaction_extra_update_package_list (PkTransactionExtra *extra)
+ 	pk_backend_get_packages (extra->priv->backend, PK_FILTER_ENUM_NONE);
+ 
+ 	/* wait for finished */
++	extra->priv->loop = g_main_loop_new (NULL, FALSE);
+ 	g_main_loop_run (extra->priv->loop);
++	g_main_loop_unref (extra->priv->loop);
+ 
+ 	/* update UI */
+ 	pk_transaction_extra_set_progress_changed (extra, 90);
+@@ -623,7 +627,9 @@ pk_transaction_extra_check_running_process (PkTransactionExtra *extra, gchar **p
+ 	pk_backend_get_files (extra->priv->backend, package_ids);
+ 
+ 	/* wait for finished */
++	extra->priv->loop = g_main_loop_new (NULL, FALSE);
+ 	g_main_loop_run (extra->priv->loop);
++	g_main_loop_unref (extra->priv->loop);
+ 
+ 	g_signal_handler_disconnect (extra->priv->backend, signal_files);
+ 	pk_transaction_extra_set_progress_changed (extra, 100);
+@@ -701,7 +707,9 @@ pk_transaction_extra_check_desktop_files (PkTransactionExtra *extra, gchar **pac
+ 	pk_backend_get_files (extra->priv->backend, package_ids);
+ 
+ 	/* wait for finished */
++	extra->priv->loop = g_main_loop_new (NULL, FALSE);
+ 	g_main_loop_run (extra->priv->loop);
++	g_main_loop_unref (extra->priv->loop);
+ 
+ 	g_signal_handler_disconnect (extra->priv->backend, signal_files);
+ 	pk_transaction_extra_set_progress_changed (extra, 100);
+@@ -1047,7 +1055,9 @@ pk_transaction_extra_applications_are_running (PkTransactionExtra *extra, gchar
+ 	pk_backend_get_files (extra->priv->backend, package_ids);
+ 
+ 	/* wait for finished */
++	extra->priv->loop = g_main_loop_new (NULL, FALSE);
+ 	g_main_loop_run (extra->priv->loop);
++	g_main_loop_unref (extra->priv->loop);
+ 
+ 	/* there is a file we can't COW */
+ 	if (extra->priv->files_list->len != 0) {
+@@ -1123,7 +1133,9 @@ pk_transaction_extra_check_library_restart_pre (PkTransactionExtra *extra, gchar
+ 	pk_backend_get_files (extra->priv->backend, package_ids);
+ 
+ 	/* wait for finished */
++	extra->priv->loop = g_main_loop_new (NULL, FALSE);
+ 	g_main_loop_run (extra->priv->loop);
++	g_main_loop_unref (extra->priv->loop);
+ 
+ 	/* nothing to do */
+ 	if (extra->priv->files_list->len == 0) {
+@@ -1173,9 +1185,6 @@ pk_transaction_extra_finalize (GObject *object)
+ 
+ 	if (extra->priv->pids != NULL)
+ 		g_ptr_array_free (extra->priv->pids, TRUE);
+-	if (g_main_loop_is_running (extra->priv->loop))
+-		g_main_loop_quit (extra->priv->loop);
+-	g_main_loop_unref (extra->priv->loop);
+ 	sqlite3_close (extra->priv->db);
+ 	g_hash_table_unref (extra->priv->hash);
+ 	g_ptr_array_unref (extra->priv->files_list);
+@@ -1227,7 +1236,6 @@ pk_transaction_extra_init (PkTransactionExtra *extra)
+ 	gint rc;
+ 
+ 	extra->priv = PK_POST_TRANS_GET_PRIVATE (extra);
+-	extra->priv->loop = g_main_loop_new (NULL, FALSE);
+ 	extra->priv->list = g_ptr_array_new_with_free_func ((GDestroyNotify) g_object_unref);
+ 	extra->priv->backend = pk_backend_new ();
+ 	extra->priv->lsof = pk_lsof_new ();
+-- 
+1.9.0
+
+From 32850275b0fc6e80491f4a6c8f67c63da49cabf8 Mon Sep 17 00:00:00 2001
+From: Richard Hughes <richard@hughsie.com>
+Date: Tue, 20 May 2014 14:07:47 +0100
+Subject: [PATCH 2/4] Do not scan desktop files by default
+
+This was a significant source of crashes in RHEL, and it's only optionally used
+in older versions of gnome-packagekit when showing applications-as-packages.
+---
+ etc/PackageKit.conf.in | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/etc/PackageKit.conf.in b/etc/PackageKit.conf.in
+index c3cef5f..7096fe7 100644
+--- a/etc/PackageKit.conf.in
++++ b/etc/PackageKit.conf.in
+@@ -123,8 +123,8 @@ UseSyslog=false
+ #
+ # NOTE: Don't enable this for backends that are slow doing SearchFile()
+ #
+-# default=true
+-ScanDesktopFiles=true
++# default=false
++ScanDesktopFiles=false
+ 
+ # Update the package list when we refresh the cache
+ #
+-- 
+1.9.0
+
+From 5292cbd577171fadcf910f6ff4d1c51ea243f148 Mon Sep 17 00:00:00 2001
+From: Richard Hughes <richard@hughsie.com>
+Date: Tue, 20 May 2014 14:09:48 +0100
+Subject: [PATCH 3/4] Do not generate the package cache by default
+
+This was unreliable, and only really used in the search-as-you-type
+functionality in gnome-packagekit.
+---
+ etc/PackageKit.conf.in | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/etc/PackageKit.conf.in b/etc/PackageKit.conf.in
+index 7096fe7..c43b142 100644
+--- a/etc/PackageKit.conf.in
++++ b/etc/PackageKit.conf.in
+@@ -130,8 +130,8 @@ ScanDesktopFiles=false
+ #
+ # NOTE: Don't enable this for backends that are slow doing GetPackages()
+ #
+-# default=true
+-UpdatePackageList=true
++# default=false
++UpdatePackageList=false
+ 
+ # Check for running processes when we update packages
+ #
+-- 
+1.9.0
+
+From 491fb62e01dd47d31ddc86dbe704fdf8c7b99fe4 Mon Sep 17 00:00:00 2001
+From: Richard Hughes <richard@hughsie.com>
+Date: Tue, 20 May 2014 14:12:12 +0100
+Subject: [PATCH 4/4] Do not scan the session processes by default
+
+We can't do this reliably when sessions are coming and going, and we often show
+false-positives.
+---
+ etc/PackageKit.conf.in | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/etc/PackageKit.conf.in b/etc/PackageKit.conf.in
+index c43b142..f0d801e 100644
+--- a/etc/PackageKit.conf.in
++++ b/etc/PackageKit.conf.in
+@@ -138,8 +138,8 @@ UpdatePackageList=false
+ # NOTE: Don't enable this for backends that are slow doing GetFiles() on
+ # installed files.
+ #
+-# default=true
+-UpdateCheckProcesses=true
++# default=false
++UpdateCheckProcesses=false
+ 
+ # Check for shared libraries that are in use, that are replaced by packages
+ # that are marked as security updates.
+-- 
+1.9.0
+

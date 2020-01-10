@@ -10,7 +10,7 @@
 Summary:   Package management service
 Name:      PackageKit
 Version:   0.5.8
-Release:   21%{?dist}
+Release:   23%{?dist}
 License:   GPLv2+
 Group:     System Environment/Libraries
 URL:       http://www.packagekit.org
@@ -78,6 +78,12 @@ Patch18:    PackageKit-0.5.8-new-xulrunner.patch
 
 # test patch for RHEL
 Patch19:    PackageKit-0.5.8-dont-crash-if-ck-killed.patch
+
+# upstream: https://bugzilla.redhat.com/show_bug.cgi?id=811097
+Patch20:    0001-Fix-problem-whereby-the-terminal-wouldn-t-return-dat.patch
+
+# upstream: https://bugzilla.redhat.com/show_bug.cgi?id=811097
+Patch21:    0001-Do-not-crash-when-running-the-GMainLoop-in-PkTransac.patch
 
 Requires: dbus >= %{dbus_version}
 Requires: dbus-glib >= %{dbus_glib_version}
@@ -307,6 +313,8 @@ user to restart the computer or remove and re-insert the device.
 %patch17 -p1 -b .pkcon-noninteractive
 %patch18 -p1 -b .new-xulrunner
 %patch19 -p1 -b .dont-crash-if-ck-killed
+%patch20 -p1 -b .swallow-newline
+%patch21 -p1 -b .gmainloop-lifecycle
 
 %build
 %configure \
@@ -519,6 +527,15 @@ update-mime-database %{_datadir}/mime &> /dev/null || :
 %{_includedir}/PackageKit/backend/*.h
 
 %changelog
+* Tue May 20 2014 Richard Hughes  <rhughes@redhat.com> - 0.5.8-23
+- Do not crash when running the GMainLoop in PkTransactionExtra
+- Resolves: #743399
+
+* Tue May 20 2014 Richard Hughes  <rhughes@redhat.com> - 0.5.8-22
+- Handle unbuffered input in a better way to fix the simulate declined failure
+  when using pkcon.
+- Resolves: #811097
+
 * Mon Nov 01 2012 Richard Hughes  <rhughes@redhat.com> - 0.5.8-21
 - Do not crash if ConsoleKit is killed or itself crashes.
 - Resolves: #735597

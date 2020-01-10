@@ -1,0 +1,48 @@
+From 3e5d25c5e13074d87b7f7a45dae142a7ead3298d Mon Sep 17 00:00:00 2001
+From: Michael Meeks <michael.meeks@novell.com>
+Date: Thu, 6 May 2010 11:06:18 +0100
+Subject: [PATCH] Fix problem whereby the terminal wouldn't return data to
+ scanf from a read before newline; but pk_console_get_number would only
+ consume the digits, leaving a '\n' malingering to break a subsequent
+ pk_console_getchar_unbuffered.
+
+---
+ lib/packagekit-glib2/pk-console-shared.c | 12 +++++++++---
+ 1 file changed, 9 insertions(+), 3 deletions(-)
+
+diff --git a/lib/packagekit-glib2/pk-console-shared.c b/lib/packagekit-glib2/pk-console-shared.c
+index ce9c658..7cfa6b7 100644
+--- a/lib/packagekit-glib2/pk-console-shared.c
++++ b/lib/packagekit-glib2/pk-console-shared.c
+@@ -50,11 +50,17 @@ pk_console_get_number (const gchar *question, guint maxnum)
+ 	g_print ("%s", question);
+ 
+ 	do {
++		char buffer[64];
++
++		/* swallow the \n at end of line too */
++		if (!fgets (buffer, 64, stdin))
++			break;
++
+ 		/* get a number */
+-		retval = scanf("%u", &answer);
++		retval = sscanf(buffer, "%u", &answer);
+ 
+ 		/* positive */
+-		if (retval == 1 && answer > 0 && answer <= (gint) maxnum)
++		if (answer > 0 && answer <= (gint) maxnum)
+ 			break;
+ 		g_print (_("Please enter a number from 1 to %i: "), maxnum);
+ 	} while (TRUE);
+@@ -80,7 +86,7 @@ pk_console_getchar_unbuffered (void)
+ 	memcpy (&new_opts, &org_opts, sizeof(new_opts));
+ 	new_opts.c_lflag &= ~(ICANON | ECHO | ECHOE | ECHOK | ECHONL | ECHOPRT | ECHOKE | ICRNL);
+ 	tcsetattr (STDIN_FILENO, TCSANOW, &new_opts);
+-	c = getchar ();
++	c = getc (stdin);
+ 
+ 	/* restore old settings */
+ 	res = tcsetattr (STDIN_FILENO, TCSANOW, &org_opts);
+-- 
+1.9.0
+
