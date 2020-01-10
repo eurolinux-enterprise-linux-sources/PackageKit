@@ -10,7 +10,7 @@
 Summary:   Package management service
 Name:      PackageKit
 Version:   0.5.8
-Release:   23%{?dist}
+Release:   25%{?dist}
 License:   GPLv2+
 Group:     System Environment/Libraries
 URL:       http://www.packagekit.org
@@ -84,6 +84,12 @@ Patch20:    0001-Fix-problem-whereby-the-terminal-wouldn-t-return-dat.patch
 
 # upstream: https://bugzilla.redhat.com/show_bug.cgi?id=811097
 Patch21:    0001-Do-not-crash-when-running-the-GMainLoop-in-PkTransac.patch
+
+# upstream: https://bugzilla.redhat.com/show_bug.cgi?id=1140837
+Patch22:    0001-yum-Fix-python-traceback-when-using-obsolete-version.patch
+
+# upstream: https://bugzilla.redhat.com/show_bug.cgi?id=1172119
+Patch23:    0001-Never-send-a-cron-report-with-no-contents.patch
 
 Requires: dbus >= %{dbus_version}
 Requires: dbus-glib >= %{dbus_glib_version}
@@ -315,6 +321,8 @@ user to restart the computer or remove and re-insert the device.
 %patch19 -p1 -b .dont-crash-if-ck-killed
 %patch20 -p1 -b .swallow-newline
 %patch21 -p1 -b .gmainloop-lifecycle
+%patch22 -p1 -b .no-error-with-obsolete-rpm
+%patch23 -p1 -b .no-empty-cron-emails
 
 %build
 %configure \
@@ -527,6 +535,14 @@ update-mime-database %{_datadir}/mime &> /dev/null || :
 %{_includedir}/PackageKit/backend/*.h
 
 %changelog
+* Wed Feb 25 2015 Richard Hughes  <rhughes@redhat.com> - 0.5.8-25
+- Never send a cron report with no contents
+- Resolves: #1172119
+
+* Wed Feb 25 2015 Richard Hughes  <rhughes@redhat.com> - 0.5.8-24
+- Fix python traceback when using obsolete versions of RPM
+- Resolves: #1140837
+
 * Tue May 20 2014 Richard Hughes  <rhughes@redhat.com> - 0.5.8-23
 - Do not crash when running the GMainLoop in PkTransactionExtra
 - Resolves: #743399

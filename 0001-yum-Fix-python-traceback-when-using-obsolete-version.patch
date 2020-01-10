@@ -1,0 +1,27 @@
+From a785d2ee46ce5a39f22354e5282c2f0fea0bd8ec Mon Sep 17 00:00:00 2001
+From: Richard Hughes <richard@hughsie.com>
+Date: Wed, 25 Feb 2015 14:20:04 +0000
+Subject: [PATCH] yum: Fix python traceback when using obsolete versions of RPM
+
+---
+ backends/yum/yumBackend.py | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/backends/yum/yumBackend.py b/backends/yum/yumBackend.py
+index 7e167df..50fb1c4 100755
+--- a/backends/yum/yumBackend.py
++++ b/backends/yum/yumBackend.py
+@@ -2984,6 +2984,10 @@ class PackageKitCallback(RPMBaseCallback):
+ 
+     def event(self, package, action, te_current, te_total, ts_current, ts_total):
+ 
++        # for really old versions of rpm
++        if te_total <= 0:
++            return
++
+         if str(package) != str(self.curpkg):
+             self.curpkg = package
+             try:
+-- 
+2.1.0
+

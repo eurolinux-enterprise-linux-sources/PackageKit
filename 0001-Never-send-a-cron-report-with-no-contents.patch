@@ -1,0 +1,38 @@
+From e3ea92eb20056288cea33a305361f7ce54bcaf22 Mon Sep 17 00:00:00 2001
+From: Richard Hughes <richard@hughsie.com>
+Date: Wed, 25 Feb 2015 14:41:18 +0000
+Subject: [PATCH] Never send a cron report with no contents
+
+---
+ contrib/cron/packagekit-background.cron | 15 +++++++++------
+ 1 file changed, 9 insertions(+), 6 deletions(-)
+
+diff --git a/contrib/cron/packagekit-background.cron b/contrib/cron/packagekit-background.cron
+index fb93779..ea7d645 100755
+--- a/contrib/cron/packagekit-background.cron
++++ b/contrib/cron/packagekit-background.cron
+@@ -36,12 +36,15 @@ fi
+ 
+ # this is when seomthing useful was done
+ if [ $PKCON_RETVAL -ne 5 ]; then
+-	# send email
+-	if [ -n "$MAILTO" ]; then
+-		mail -s "System updates available: $SYSTEMNAME" $MAILTO < $PKTMP
+-	else
+-		# default behavior is to use cron's internal mailing of output from cron-script
+-		cat $PKTMP
++	# we actually have something to report
++	if [ -s $PKTMP ]; then
++		# send email
++		if [ -n "$MAILTO" ]; then
++			mail -s "System updates available: $SYSTEMNAME" $MAILTO < $PKTMP
++		else
++			# default behavior is to use cron's internal mailing of output from cron-script
++			cat $PKTMP
++		fi
+ 	fi
+ fi
+ 
+-- 
+2.1.0
+
