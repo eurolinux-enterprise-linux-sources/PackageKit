@@ -1,0 +1,136 @@
+From b88bbf815f44ce5e84a159b4270c2b3ef7614601 Mon Sep 17 00:00:00 2001
+From: Nils Philippsen <nils@redhat.com>
+Date: Fri, 2 Mar 2012 13:11:14 +0100
+Subject: [PATCH] patch: untrusted-pw-entry
+
+Squashed commit of the following:
+
+commit 21cafda0ee722325cd9a305330ae7073b53b0f6e
+Author: Nils Philippsen <nils@redhat.com>
+Date:   Mon Jan 9 15:51:17 2012 +0100
+
+    yum: don't request authorization for trusted packages (#771746)
+
+    Misunderstood PackageKitYumBackend._is_package_repo_signed() semantics,
+    revert to the implementation from before I fixed it till it broke.
+    (cherry picked from commit d99c430775a6de3e7e98819f5b5c0c6017d6edde)
+
+commit 8b3594bec8675d5b33fcbcc6563fcb3d318d5343
+Author: Nils Philippsen <nils@redhat.com>
+Date:   Thu Nov 24 11:39:59 2011 +0100
+
+    yum: consistently use same logic to determine GPG checking
+
+    Always check for existence of _override_sigchecks attribute, in
+    _is_package_repo_signed() as well as in _set_only_trusted().
+    (cherry picked from commit f527cfa46515fb26cb8d6b59803f90d2f22483d8)
+
+commit 21fd7ad4e5e38fed0968ef8794683d00cac0781a
+Author: Nils Philippsen <nils@redhat.com>
+Date:   Wed Nov 23 15:30:39 2011 +0100
+
+    use current yum API for installing untrusted packages
+
+    YumBase in yum >= 3.2.29 doesn't use conf objects for setting up
+    installation or update of untrusted packages. Consolidate the code
+    setting this up in _set_only_trusted(), and set it up the way the yum
+    CLI does (since 3.2.29) or respectively did before.
+    (cherry picked from commit 1055c52d723346006d8bbb7e0f2b324c9de9b82f)
+
+    Conflicts:
+
+    	backends/yum/yumBackend.py
+---
+ backends/yum/yumBackend.py |   48 +++++++++++++++++++++++++------------------
+ 1 files changed, 28 insertions(+), 20 deletions(-)
+
+diff --git a/backends/yum/yumBackend.py b/backends/yum/yumBackend.py
+index 9852e2d..b38d27f 100755
+--- a/backends/yum/yumBackend.py
++++ b/backends/yum/yumBackend.py
+@@ -1472,6 +1472,30 @@ class PackageKitYumBackend(PackageKitBaseBackend, PackagekitPackage):
+             raise PkError(ERROR_INTERNAL_ERROR, _format_str(traceback.format_exc()))
+         return signed
+ 
++    def _set_only_trusted(self, only_trusted):
++        # if only_trusted is true, it means that we will only install/update
++        # signed files
++
++        # _override_sigchecks logic is reversed
++        override_sigchecks = not only_trusted
++
++        if hasattr(self.yumbase, "_override_sigchecks"):
++            # yum >= 3.2.29:
++            self.yumbase._override_sigchecks = override_sigchecks
++
++            for repo in self.yumbase.repos.listEnabled():
++                repo._override_sigchecks = override_sigchecks
++
++        else:
++            # yum < 3.2.29:
++            for attrname in ("gpgcheck", "repo_gpgcheck", "localpkg_gpgcheck"):
++                setattr(self.yumbase.conf, attrname, only_trusted)
++
++            for attrname in ("gpgcheck", "repo_gpgcheck"):
++                for repo in self.yumbase.repos.listEnabled():
++                    setattr(repo, attrname, only_trusted)
++
++
+     def update_system(self, only_trusted):
+         '''
+         Implement the update-system functionality
+@@ -1486,11 +1510,7 @@ class PackageKitYumBackend(PackageKitBaseBackend, PackagekitPackage):
+         self.percentage(0)
+         self.status(STATUS_RUNNING)
+ 
+-        # if only_trusted is true, it means that we will only update signed files
+-        if only_trusted:
+-            self.yumbase.conf.gpgcheck = 1
+-        else:
+-            self.yumbase.conf.gpgcheck = 0
++        self._set_only_trusted(only_trusted)
+ 
+         self.yumbase.conf.throttle = "60%" # Set bandwidth throttle to 60%
+                                            # to avoid taking all the system's bandwidth.
+@@ -1664,11 +1684,7 @@ class PackageKitYumBackend(PackageKitBaseBackend, PackagekitPackage):
+         self.status(STATUS_RUNNING)
+         txmbrs = []
+ 
+-        # if only_trusted is true, it means that we will only update signed files
+-        if only_trusted:
+-            self.yumbase.conf.gpgcheck = 1
+-        else:
+-            self.yumbase.conf.gpgcheck = 0
++        self._set_only_trusted(only_trusted)
+ 
+         for package_id in package_ids:
+             grp = self._is_meta_package(package_id)
+@@ -1851,11 +1867,7 @@ class PackageKitYumBackend(PackageKitBaseBackend, PackagekitPackage):
+             self.error(ERROR_ALL_PACKAGES_ALREADY_INSTALLED,
+                        'All of the specified packages have already been installed')
+ 
+-        # If only_trusted is true, it means that we will only install trusted files
+-        if only_trusted or simulate:
+-            self.yumbase.conf.gpgcheck = 1
+-        else:
+-            self.yumbase.conf.gpgcheck = 0
++        self._set_only_trusted(only_trusted or simulate)
+ 
+         # self.yumbase.installLocal fails for unsigned packages when self.yumbase.conf.gpgcheck = 1
+         # This means we don't run runYumTransaction, and don't get the GPG failure in
+@@ -1995,11 +2007,7 @@ class PackageKitYumBackend(PackageKitBaseBackend, PackagekitPackage):
+         self.percentage(0)
+         self.status(STATUS_RUNNING)
+ 
+-        # if only_trusted is true, it means that we will only update signed files
+-        if only_trusted:
+-            self.yumbase.conf.gpgcheck = 1
+-        else:
+-            self.yumbase.conf.gpgcheck = 0
++        self._set_only_trusted(only_trusted)
+ 
+         txmbrs = []
+         try:
+-- 
+1.7.7.6
+

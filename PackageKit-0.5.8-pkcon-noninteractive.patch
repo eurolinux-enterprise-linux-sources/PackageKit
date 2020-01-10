@@ -1,0 +1,149 @@
+From 380719ff385f33e838ab9f66357729173697c0cf Mon Sep 17 00:00:00 2001
+From: Richard Hughes <richard@hughsie.com>
+Date: Fri, 2 Mar 2012 13:59:14 +0100
+Subject: [PATCH] glib: Add an 'interactive' property to PkTask so that we 
+ can use it to do '-y' in pkcon properly
+
+(backported from commit c46cc1401f9ed10a6416b4da2267e0ced2678257)
+---
+ client/pk-console.c            |    1 +
+ lib/packagekit-glib2/pk-task.c |   50 ++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 51 insertions(+), 0 deletions(-)
+
+diff --git a/client/pk-console.c b/client/pk-console.c
+index d8659c4..10efbb8 100644
+--- a/client/pk-console.c
++++ b/client/pk-console.c
+@@ -1329,6 +1329,7 @@ main (int argc, char *argv[])
+ 	g_object_set (task,
+ 		      "background", background,
+ 		      "simulate", !noninteractive,
++		      "interactive", !noninteractive,
+ 		      NULL);
+ 
+ 	/* check filter */
+diff --git a/lib/packagekit-glib2/pk-task.c b/lib/packagekit-glib2/pk-task.c
+index 45296f3..0aecfbe 100644
+--- a/lib/packagekit-glib2/pk-task.c
++++ b/lib/packagekit-glib2/pk-task.c
+@@ -49,11 +49,13 @@ struct _PkTaskPrivate
+ {
+ 	GPtrArray			*array;
+ 	gboolean			 simulate;
++	gboolean			 interactive;
+ };
+ 
+ enum {
+ 	PROP_0,
+ 	PROP_SIMULATE,
++	PROP_INTERACTIVE,
+ 	PROP_LAST
+ };
+ 
+@@ -695,6 +697,13 @@ pk_task_ready_cb (GObject *source_object, GAsyncResult *res, PkTaskState *state)
+ 	if (state->exit_enum == PK_EXIT_ENUM_NEED_UNTRUSTED) {
+ 		state->only_trusted = FALSE;
+ 
++		/* running non-interactive */
++		if (!state->task->priv->interactive) {
++			egg_debug ("working non-interactive, so calling accept");
++			pk_task_user_accepted (state->task, state->request);
++			goto out;
++		}
++
+ 		/* no support */
+ 		if (klass->untrusted_question == NULL) {
+ 			error = g_error_new (PK_CLIENT_ERROR, PK_CLIENT_ERROR_NOT_SUPPORTED,
+@@ -711,6 +720,14 @@ pk_task_ready_cb (GObject *source_object, GAsyncResult *res, PkTaskState *state)
+ 
+ 	/* need key */
+ 	if (state->exit_enum == PK_EXIT_ENUM_KEY_REQUIRED) {
++
++		/* running non-interactive */
++		if (!state->task->priv->interactive) {
++			egg_debug ("working non-interactive, so calling accept");
++			pk_task_user_accepted (state->task, state->request);
++			goto out;
++		}
++
+ 		/* no support */
+ 		if (klass->key_question == NULL) {
+ 			error = g_error_new (PK_CLIENT_ERROR, PK_CLIENT_ERROR_NOT_SUPPORTED,
+@@ -727,6 +744,14 @@ pk_task_ready_cb (GObject *source_object, GAsyncResult *res, PkTaskState *state)
+ 
+ 	/* need EULA */
+ 	if (state->exit_enum == PK_EXIT_ENUM_EULA_REQUIRED) {
++
++		/* running non-interactive */
++		if (!state->task->priv->interactive) {
++			egg_debug ("working non-interactive, so calling accept");
++			pk_task_user_accepted (state->task, state->request);
++			goto out;
++		}
++
+ 		/* no support */
+ 		if (klass->eula_question == NULL) {
+ 			error = g_error_new (PK_CLIENT_ERROR, PK_CLIENT_ERROR_NOT_SUPPORTED,
+@@ -743,6 +768,14 @@ pk_task_ready_cb (GObject *source_object, GAsyncResult *res, PkTaskState *state)
+ 
+ 	/* need media change */
+ 	if (state->exit_enum == PK_EXIT_ENUM_MEDIA_CHANGE_REQUIRED) {
++
++		/* running non-interactive */
++		if (!state->task->priv->interactive) {
++			egg_debug ("working non-interactive, so calling accept");
++			pk_task_user_accepted (state->task, state->request);
++			goto out;
++		}
++
+ 		/* no support */
+ 		if (klass->media_change_question == NULL) {
+ 			error = g_error_new (PK_CLIENT_ERROR, PK_CLIENT_ERROR_NOT_SUPPORTED,
+@@ -1070,6 +1103,9 @@ pk_task_get_property (GObject *object, guint prop_id, GValue *value, GParamSpec
+ 	case PROP_SIMULATE:
+ 		g_value_set_boolean (value, priv->simulate);
+ 		break;
++	case PROP_INTERACTIVE:
++		g_value_set_boolean (value, priv->interactive);
++		break;
+ 	default:
+ 		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+ 		break;
+@@ -1089,6 +1125,9 @@ pk_task_set_property (GObject *object, guint prop_id, const GValue *value, GPara
+ 	case PROP_SIMULATE:
+ 		priv->simulate = g_value_get_boolean (value);
+ 		break;
++	case PROP_INTERACTIVE:
++		priv->interactive = g_value_get_boolean (value);
++		break;
+ 	default:
+ 		G_OBJECT_WARN_INVALID_PROPERTY_ID (object, prop_id, pspec);
+ 		break;
+@@ -1115,6 +1154,16 @@ pk_task_class_init (PkTaskClass *klass)
+ 				      G_PARAM_READWRITE);
+ 	g_object_class_install_property (object_class, PROP_SIMULATE, pspec);
+ 
++	/**
++	 * PkTask:interactive:
++	 *
++	 * Since: 0.6.7
++	 */
++	pspec = g_param_spec_boolean ("interactive", NULL, NULL,
++				      TRUE,
++				      G_PARAM_READWRITE);
++	g_object_class_install_property (object_class, PROP_INTERACTIVE, pspec);
++
+ 	g_type_class_add_private (klass, sizeof (PkTaskPrivate));
+ }
+ 
+@@ -1127,6 +1176,7 @@ pk_task_init (PkTask *task)
+ 	task->priv = PK_TASK_GET_PRIVATE (task);
+ 	task->priv->array = g_ptr_array_new ();
+ 	task->priv->simulate = TRUE;
++	task->priv->interactive = TRUE;
+ }
+ 
+ /**
+-- 
+1.7.7.6
+

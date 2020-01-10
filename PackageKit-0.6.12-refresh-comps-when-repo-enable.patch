@@ -1,0 +1,20 @@
+commit c8d4cd05cfc9732765f1b5241f6c50927e1dc7ee
+Author: Richard Hughes <richard@hughsie.com>
+Date:   Tue Jan 25 12:18:16 2011 +0000
+
+    yum: Update the cached comps group list when enabling of disabling a repo. Fixes rh#629049
+
+diff --git a/backends/yum/yumBackend.py b/backends/yum/yumBackend.py
+index ccb347b..9a98543 100755
+--- a/backends/yum/yumBackend.py
++++ b/backends/yum/yumBackend.py
+@@ -2843,6 +2843,9 @@ class PackageKitYumBackend(PackageKitBaseBackend, PackagekitPackage):
+         except Exception, e:
+             self.error(ERROR_INTERNAL_ERROR, _format_str(traceback.format_exc()))
+ 
++        # update the comps groups too
++        self.comps.refresh()
++
+     def get_repo_list(self, filters):
+         '''
+         Implement the get-repo-list functionality

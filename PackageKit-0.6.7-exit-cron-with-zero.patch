@@ -1,0 +1,22 @@
+commit 36333a4ba1fadecd9e014aef74ffe5dd9ebf720c
+Author: Vincent Untz <vuntz@gnome.org>
+Date:   Fri Jul 23 10:22:27 2010 +0200
+
+    cron: Do not exit with 1 if the cron script is disabled in the config
+    
+    Exiting with 1 means it is an error, while it's really just a
+    configuration option.
+
+diff --git a/contrib/cron/packagekit-background.cron b/contrib/cron/packagekit-background.cron
+index e62d204..0a053b6 100755
+--- a/contrib/cron/packagekit-background.cron
++++ b/contrib/cron/packagekit-background.cron
+@@ -13,7 +13,7 @@
+ 
+ # are we disabled?
+ if [ "$ENABLED" = "no" ]; then
+-	exit 1
++	exit 0
+ fi
+ 
+ # set default for SYSTEM_NAME

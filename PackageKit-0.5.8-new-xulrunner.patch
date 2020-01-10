@@ -1,0 +1,58 @@
+From 16e797eca607cae9610abe0259328d5053b42453 Mon Sep 17 00:00:00 2001
+From: Nils Philippsen <nils@redhat.com>
+Date: Fri, 2 Mar 2012 17:07:40 +0100
+Subject: [PATCH] patch: new-xulrunner
+
+Abridged: squashed commit of the following:
+
+commit 7853142f5204fc893cfbfb62e8456c2b68a7307a
+Author: Matthias Klumpp <matthias@tenstral.net>
+Date:   Fri Nov 18 14:23:14 2011 +0100
+
+    browser-plugin: Make it compile with newest xulrunner
+
+    Attention! This will make builds with older xulrunner
+    versions impossible. I will implement a workaround for
+    this later, if it is less invasive or if someone needs it.
+    But all distributions shipping PK 0.7.x should also ship
+    a new Firefox/Xulrunner version, as the old ones are unsupported.
+
+    Conflicts:
+
+    	configure.ac
+    	contrib/browser-plugin/pk-main.c
+    (cherry picked from commit 65baf370dab99f7f13efbc4fee51e88b53084cdc)
+
+commit 99def7a09bea86b96c859e3de57b50a2e4841273
+Author: Richard Hughes <richard@hughsie.com>
+Date:   Mon Dec 5 10:24:28 2011 +0000
+
+    Make the browser plugin compile with newer versions of xulrunner
+    (cherry picked from commit a74d58a2adf03b520fcd1ce3f134ef8fdc1d1fc2)
+---
+ contrib/browser-plugin/pk-main.c |    7 +++----
+ 2 files changed, 7 insertions(+), 8 deletions(-)
+
+diff --git a/contrib/browser-plugin/pk-main.c b/contrib/browser-plugin/pk-main.c
+index 62914e0..d6516a2 100644
+--- a/contrib/browser-plugin/pk-main.c
++++ b/contrib/browser-plugin/pk-main.c
+@@ -539,12 +539,11 @@ NP_Shutdown ()
+ /**
+  * NP_GetMIMEDescription:
+  **/
+-char *
++const char *
+ NP_GetMIMEDescription (void)
+ {
+-	pk_debug ("NP_GetMIMEDescription");
+-
+-	return (gchar*) "application/x-packagekit-plugin:bsc:PackageKit Plugin";
++	g_debug ("NP_GetMIMEDescription");
++	return (const gchar*) "application/x-packagekit-plugin:bsc:PackageKit Plugin";
+ }
+ 
+ /**
+-- 
+1.7.7.6
+

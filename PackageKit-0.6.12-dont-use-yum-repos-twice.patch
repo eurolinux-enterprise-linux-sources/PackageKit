@@ -1,0 +1,45 @@
+commit 36d97933479400948d96a57c1a72921b219a505d
+Author: Richard Hughes <richard@hughsie.com>
+Date:   Tue Jan 25 11:43:58 2011 +0000
+
+    yum: Do not attempt to call yum.repos twice when using RHN
+    
+    If using PK+yum+RHN we can try to setup the prerepoconf stuff twice,
+    which explodes in an ugly python backtrace. Try to do something clever
+    in this case, to avoid the AttributeError.
+    
+    Patch idea from James Antill, many thanks.
+
+diff --git a/backends/yum/yumBackend.py b/backends/yum/yumBackend.py
+index 84985af..51e3bb5 100755
+--- a/backends/yum/yumBackend.py
++++ b/backends/yum/yumBackend.py
+@@ -3450,10 +3450,25 @@ class PackageKitYumBase(yum.YumBase):
+         self.dsCallback = DepSolveCallback(backend)
+         self.backend = backend
+         self.mediagrabber = self.MediaGrabber
++
+         # setup Repo GPG support callbacks
+-        try:
+-            self.repos.confirm_func = self._repo_gpg_confirm
+-            self.repos.gpg_import_func = self._repo_gpg_import
++        #
++        # self.preconf may or may not exist at this point...
++        # What we think is happening is that it's going:
++        #
++        #    PK.init => yum._getRepos => yum.conf =>
++        #    plugins *.init_hook => RHN.init => conduit.getRepos() =>
++        #    yum._getRepos
++        #
++        # ..at which point we try to setup from prerepoconf twice, and
++        # the second time it fails.
++        try:
++            if hasattr(self, 'prerepoconf'):
++                self.prerepoconf.confirm_func = self._repo_gpg_confirm
++                self.prerepoconf.gpg_import_func = self._repo_gpg_import
++            else:
++                self.repos.confirm_func = self._repo_gpg_confirm
++                self.repos.gpg_import_func = self._repo_gpg_import
+         except exceptions.IOError, e:
+             raise PkError(ERROR_NO_SPACE_ON_DEVICE, "Disk error: %s" % _to_unicode(e))
+         except Exception, e:
