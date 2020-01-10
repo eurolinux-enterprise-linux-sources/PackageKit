@@ -1,0 +1,26 @@
+From 9da6261700ca5877a78700bd6bf14c3637405224 Mon Sep 17 00:00:00 2001
+From: Richard Hughes <richard@hughsie.com>
+Date: Wed, 7 Apr 2010 09:39:20 +0100
+Subject: [PATCH] yum: Ensure we force a cache update if the comps groups
+ cannot be loaded
+
+---
+ backends/yum/yumBackend.py | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/backends/yum/yumBackend.py b/backends/yum/yumBackend.py
+index 50fb1c4..3400fea 100755
+--- a/backends/yum/yumBackend.py
++++ b/backends/yum/yumBackend.py
+@@ -240,7 +240,7 @@ class PackageKitYumBackend(PackageKitBaseBackend, PackagekitPackage):
+         self.package_summary_cache = {}
+         self.comps = yumComps(self.yumbase)
+         if not self.comps.connect():
+-            self.refresh_cache()
++            self.refresh_cache(True)
+             if not self.comps.connect():
+                 self.error(ERROR_GROUP_LIST_INVALID, 'comps categories could not be loaded')
+ 
+-- 
+2.5.0
+

@@ -10,7 +10,7 @@
 Summary:   Package management service
 Name:      PackageKit
 Version:   0.5.8
-Release:   25%{?dist}
+Release:   26%{?dist}
 License:   GPLv2+
 Group:     System Environment/Libraries
 URL:       http://www.packagekit.org
@@ -90,6 +90,15 @@ Patch22:    0001-yum-Fix-python-traceback-when-using-obsolete-version.patch
 
 # upstream: https://bugzilla.redhat.com/show_bug.cgi?id=1172119
 Patch23:    0001-Never-send-a-cron-report-with-no-contents.patch
+
+# upstream: https://bugzilla.redhat.com/show_bug.cgi?id=1268932
+Patch24:    0001-yum-Ensure-we-force-a-cache-update-if-the-comps-grou.patch
+
+# upstream: https://bugzilla.redhat.com/show_bug.cgi?id=984836
+Patch25:    0001-yum-Do-not-substitute-in-error-messages.patch
+
+# upstream: https://bugzilla.redhat.com/show_bug.cgi?id=1204932
+Patch26:    0001-Do-not-ever-run-the-transaction-plugins.patch
 
 Requires: dbus >= %{dbus_version}
 Requires: dbus-glib >= %{dbus_glib_version}
@@ -323,6 +332,9 @@ user to restart the computer or remove and re-insert the device.
 %patch21 -p1 -b .gmainloop-lifecycle
 %patch22 -p1 -b .no-error-with-obsolete-rpm
 %patch23 -p1 -b .no-empty-cron-emails
+%patch24 -p1 -b .refresh-cache-takes-2-arguments
+%patch25 -p1 -b .no-substitute-in-error-messages
+%patch26 -p1 -b .no-transaction-plugins
 
 %build
 %configure \
@@ -535,6 +547,12 @@ update-mime-database %{_datadir}/mime &> /dev/null || :
 %{_includedir}/PackageKit/backend/*.h
 
 %changelog
+* Tue Dec 08 2015 Richard Hughes  <rhughes@redhat.com> - 0.5.8-26
+- Fix a python traceback when the comps groups cannot be loaded
+- Do not substitute '%' in error messages as this is misleading
+- Do not ever run the transaction plugins even for modified configs
+- Resolves: #1268932, #984836, #1204932
+
 * Wed Feb 25 2015 Richard Hughes  <rhughes@redhat.com> - 0.5.8-25
 - Never send a cron report with no contents
 - Resolves: #1172119

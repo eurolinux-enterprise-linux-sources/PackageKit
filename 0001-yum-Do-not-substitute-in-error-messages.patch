@@ -1,0 +1,31 @@
+From 812f952d77fd8e1a716cde2274f8d3ff3cf54194 Mon Sep 17 00:00:00 2001
+From: Richard Hughes <richard@hughsie.com>
+Date: Tue, 8 Dec 2015 19:44:57 +0000
+Subject: [PATCH] yum: Do not substitute '%' in error messages
+
+The correct fix is to just set a dummy format string.
+
+Resolves: https://bugzilla.redhat.com/show_bug.cgi?id=984836
+---
+ src/pk-backend-spawn.c | 5 +----
+ 1 file changed, 1 insertion(+), 4 deletions(-)
+
+diff --git a/src/pk-backend-spawn.c b/src/pk-backend-spawn.c
+index 1288815..5904eac 100644
+--- a/src/pk-backend-spawn.c
++++ b/src/pk-backend-spawn.c
+@@ -327,10 +327,7 @@ pk_backend_spawn_parse_stdout (PkBackendSpawn *backend_spawn, const gchar *line)
+ 		/* convert ; to \n as we can't emit them on stdout */
+ 		g_strdelimit (text, ";", '\n');
+ 
+-		/* convert % else we try to format them */
+-		g_strdelimit (text, "%", '$');
+-
+-		pk_backend_error_code (backend_spawn->priv->backend, error_enum, text);
++		pk_backend_error_code (backend_spawn->priv->backend, error_enum, "%s", text);
+ 		g_free (text);
+ 	} else if (g_strcmp0 (command, "requirerestart") == 0) {
+ 		if (size != 3) {
+-- 
+2.5.0
+
