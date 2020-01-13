@@ -1,0 +1,47 @@
+--- a/etc/Vendor.conf	2015-11-23 14:10:50.000000000 -0600
++++ b/etc/Vendor.conf	2015-11-23 14:13:53.472690715 -0600
+@@ -12,7 +12,7 @@
+ # If the value is set to 'none' then no link is shown.
+ #
+ # default=http://www.packagekit.org/pk-package-not-found.html
+-DefaultUrl=https://access.redhat.com/site/solutions/537113#Missing_Package
++DefaultUrl=http://www.packagekit.org/pk-package-not-found.html
+ 
+ # The URL which is shown to the user when a codec could not be found.
+ # It should explain why certain codecs cannot be used, and perhaps show
+@@ -21,7 +21,7 @@ DefaultUrl=https://access.redhat.com/sit
+ # If the value is set to 'none' then the value of DefaultUrl is used.
+ #
+ # default=none
+-CodecUrl=https://access.redhat.com/site/solutions/537113#Missing_Codec
++CodecUrl=none
+ 
+ # The URL which is shown to the user when hardware drivers could not be found.
+ # It should explain why some hardware is not supported, and links to futher
+@@ -30,7 +30,7 @@ CodecUrl=https://access.redhat.com/site/
+ # If the value is set to 'none' then the value of DefaultUrl is used.
+ #
+ # default=none
+-HardwareUrl=https://access.redhat.com/site/solutions/537113#Missing_Driver
++HardwareUrl=none
+ 
+ # The URL which is shown to the user when fonts could not be found.
+ # Alternatives should probably be suggested where possible.
+@@ -38,7 +38,7 @@ HardwareUrl=https://access.redhat.com/si
+ # If the value is set to 'none' then the value of DefaultUrl is used.
+ #
+ # default=none
+-FontUrl=https://access.redhat.com/site/solutions/537113#Missing_Font
++FontUrl=none
+ 
+ # The URL which is shown to the user when programs handing a mime tpye could not
+ # be found. It should probably explain how to use wine if the program is a
+@@ -47,4 +47,7 @@ FontUrl=https://access.redhat.com/site/s
+ # If the value is set to 'none' then the value of DefaultUrl is used.
+ #
+ # default=none
+-MimeUrl=https://access.redhat.com/site/solutions/537113#Missing_MIME_Support
++MimeUrl=none
++
++VendorName=Scientific Linux
++VendorIcon=fedora-logo-small

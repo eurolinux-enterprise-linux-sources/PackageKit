@@ -1,0 +1,13 @@
+diff --git a/backends/yum/pk-backend-yum.c b/backends/yum/pk-backend-yum.c
+index 431925a..30888f2 100644
+--- a/backends/yum/pk-backend-yum.c
++++ b/backends/yum/pk-backend-yum.c
+@@ -26,7 +26,7 @@
+ #include <string.h>
+ #include <packagekit-glib2/pk-debug.h>
+ 
+-#define PREUPGRADE_BINARY			"/usr/bin/preupgrade"
++#define PREUPGRADE_BINARY			"/usr/sbin/sl7-upgrade"
+ #define YUM_REPOS_DIRECTORY			"/etc/yum.repos.d"
+ #define YUM_BACKEND_LOCKING_RETRIES		10
+ #define YUM_BACKEND_LOCKING_DELAY		2 /* seconds */

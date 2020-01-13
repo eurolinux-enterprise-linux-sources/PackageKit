@@ -1,0 +1,13 @@
+diff --git a/data/pk-upgrade-distro.sh b/data/pk-upgrade-distro.sh
+index 0badcb3..0b143a9 100644
+--- a/data/pk-upgrade-distro.sh
++++ b/data/pk-upgrade-distro.sh
+@@ -23,6 +23,8 @@ if [ -e /etc/fedora-release ]; then
+ 	else
+ 		xdg-open http://fedoraproject.org/en/get-fedora
+ 	fi
++elif [ -x /usr/sbin/sl7-upgrade ]; then
++	pkexec /usr/sbin/sl7-upgrade
+ elif [ "$DISTRO" = "Ubuntu" ]; then
+ 	if [ -e /usr/share/pyshared/UpdateManager/DistUpgradeFetcherKDE.py ] && [ "$DESKTOP" = "kde" ]; then
+ 		PATH=`kde4-config --path exe` kdesu -- "python /usr/share/pyshared/UpdateManager/DistUpgradeFetcherKDE.py"

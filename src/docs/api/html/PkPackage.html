@@ -1,0 +1,977 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>PkPackage: PackageKit Reference Manual</title>
+<meta name="generator" content="DocBook XSL Stylesheets Vsnapshot">
+<link rel="home" href="index.html" title="PackageKit Reference Manual">
+<link rel="up" href="lpackagekit-glib2.html" title="packagekit-glib2">
+<link rel="prev" href="PkPackageSack.html" title="PkPackageSack">
+<link rel="next" href="PkProgress.html" title="PkProgress">
+<meta name="generator" content="GTK-Doc V1.28 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="5"><tr valign="middle">
+<td width="100%" align="left" class="shortcuts">
+<a href="#" class="shortcut">Top</a><span id="nav_description">  <span class="dim">|</span> 
+                  <a href="#PkPackage.description" class="shortcut">Description</a></span><span id="nav_hierarchy">  <span class="dim">|</span> 
+                  <a href="#PkPackage.object-hierarchy" class="shortcut">Object Hierarchy</a></span><span id="nav_properties">  <span class="dim">|</span> 
+                  <a href="#PkPackage.properties" class="shortcut">Properties</a></span><span id="nav_signals">  <span class="dim">|</span> 
+                  <a href="#PkPackage.signals" class="shortcut">Signals</a></span>
+</td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="16" height="16" border="0" alt="Home"></a></td>
+<td><a accesskey="u" href="lpackagekit-glib2.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
+<td><a accesskey="p" href="PkPackageSack.html"><img src="left.png" width="16" height="16" border="0" alt="Prev"></a></td>
+<td><a accesskey="n" href="PkProgress.html"><img src="right.png" width="16" height="16" border="0" alt="Next"></a></td>
+</tr></table>
+<div class="refentry">
+<a name="PkPackage"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="PkPackage.top_of_page"></a>PkPackage</span></h2>
+<p>PkPackage — Package object</p>
+</td>
+<td class="gallery_image" valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsect1">
+<a name="PkPackage.functions"></a><h2>Functions</h2>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="functions_return">
+<col class="functions_name">
+</colgroup>
+<tbody>
+<tr>
+<td class="function_type">
+<a class="link" href="PkPackage.html" title="PkPackage"><span class="returnvalue">PkPackage</span></a> *
+</td>
+<td class="function_name">
+<a class="link" href="PkPackage.html#pk-package-new" title="pk_package_new ()">pk_package_new</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>
+</td>
+<td class="function_name">
+<a class="link" href="PkPackage.html#pk-package-set-id" title="pk_package_set_id ()">pk_package_set_id</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>
+</td>
+<td class="function_name">
+<a class="link" href="PkPackage.html#pk-package-parse" title="pk_package_parse ()">pk_package_parse</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<span class="returnvalue">void</span>
+</td>
+<td class="function_name">
+<a class="link" href="PkPackage.html#pk-package-print" title="pk_package_print ()">pk_package_print</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>
+</td>
+<td class="function_name">
+<a class="link" href="PkPackage.html#pk-package-equal" title="pk_package_equal ()">pk_package_equal</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>
+</td>
+<td class="function_name">
+<a class="link" href="PkPackage.html#pk-package-equal-id" title="pk_package_equal_id ()">pk_package_equal_id</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">const <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *
+</td>
+<td class="function_name">
+<a class="link" href="PkPackage.html#pk-package-get-id" title="pk_package_get_id ()">pk_package_get_id</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<a class="link" href="PackageKit-Enumerations.html#PkInfoEnum" title="enum PkInfoEnum"><span class="returnvalue">PkInfoEnum</span></a>
+</td>
+<td class="function_name">
+<a class="link" href="PkPackage.html#pk-package-get-info" title="pk_package_get_info ()">pk_package_get_info</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<span class="returnvalue">void</span>
+</td>
+<td class="function_name">
+<a class="link" href="PkPackage.html#pk-package-set-info" title="pk_package_set_info ()">pk_package_set_info</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">const <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *
+</td>
+<td class="function_name">
+<a class="link" href="PkPackage.html#pk-package-get-summary" title="pk_package_get_summary ()">pk_package_get_summary</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">
+<span class="returnvalue">void</span>
+</td>
+<td class="function_name">
+<a class="link" href="PkPackage.html#pk-package-set-summary" title="pk_package_set_summary ()">pk_package_set_summary</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">const <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *
+</td>
+<td class="function_name">
+<a class="link" href="PkPackage.html#pk-package-get-name" title="pk_package_get_name ()">pk_package_get_name</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">const <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *
+</td>
+<td class="function_name">
+<a class="link" href="PkPackage.html#pk-package-get-version" title="pk_package_get_version ()">pk_package_get_version</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">const <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *
+</td>
+<td class="function_name">
+<a class="link" href="PkPackage.html#pk-package-get-arch" title="pk_package_get_arch ()">pk_package_get_arch</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+<tr>
+<td class="function_type">const <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *
+</td>
+<td class="function_name">
+<a class="link" href="PkPackage.html#pk-package-get-data" title="pk_package_get_data ()">pk_package_get_data</a> <span class="c_punctuation">()</span>
+</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="refsect1">
+<a name="PkPackage.properties"></a><h2>Properties</h2>
+<div class="informaltable"><table class="informaltable" border="0">
+<colgroup>
+<col width="150px" class="properties_type">
+<col width="300px" class="properties_name">
+<col width="200px" class="properties_flags">
+</colgroup>
+<tbody>
+<tr>
+<td class="property_type">
+<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *</td>
+<td class="property_name"><a class="link" href="PkPackage.html#PkPackage--description" title="The “description” property">description</a></td>
+<td class="property_flags">Read / Write</td>
+</tr>
+<tr>
+<td class="property_type"><a class="link" href="PackageKit-Enumerations.html#PkGroupEnum" title="enum PkGroupEnum"><span class="type">PkGroupEnum</span></a></td>
+<td class="property_name"><a class="link" href="PkPackage.html#PkPackage--group" title="The “group” property">group</a></td>
+<td class="property_flags">Read / Write</td>
+</tr>
+<tr>
+<td class="property_type"><a class="link" href="PackageKit-Enumerations.html#PkInfoEnum" title="enum PkInfoEnum"><span class="type">PkInfoEnum</span></a></td>
+<td class="property_name"><a class="link" href="PkPackage.html#PkPackage--info" title="The “info” property">info</a></td>
+<td class="property_flags">Read / Write</td>
+</tr>
+<tr>
+<td class="property_type">
+<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *</td>
+<td class="property_name"><a class="link" href="PkPackage.html#PkPackage--license" title="The “license” property">license</a></td>
+<td class="property_flags">Read / Write</td>
+</tr>
+<tr>
+<td class="property_type">
+<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *</td>
+<td class="property_name"><a class="link" href="PkPackage.html#PkPackage--package-id" title="The “package-id” property">package-id</a></td>
+<td class="property_flags">Read</td>
+</tr>
+<tr>
+<td class="property_type"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint64"><span class="type">guint64</span></a></td>
+<td class="property_name"><a class="link" href="PkPackage.html#PkPackage--size" title="The “size” property">size</a></td>
+<td class="property_flags">Read / Write</td>
+</tr>
+<tr>
+<td class="property_type">
+<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *</td>
+<td class="property_name"><a class="link" href="PkPackage.html#PkPackage--summary" title="The “summary” property">summary</a></td>
+<td class="property_flags">Read / Write</td>
+</tr>
+<tr>
+<td class="property_type"><a href="/usr/share/gtk-doc/html/glib/glib-String-Utility-Functions.html#GStrv"><span class="type">GStrv</span></a></td>
+<td class="property_name"><a class="link" href="PkPackage.html#PkPackage--update-bugzilla-urls" title="The “update-bugzilla-urls” property">update-bugzilla-urls</a></td>
+<td class="property_flags">Read / Write</td>
+</tr>
+<tr>
+<td class="property_type">
+<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *</td>
+<td class="property_name"><a class="link" href="PkPackage.html#PkPackage--update-changelog" title="The “update-changelog” property">update-changelog</a></td>
+<td class="property_flags">Read / Write</td>
+</tr>
+<tr>
+<td class="property_type"><a href="/usr/share/gtk-doc/html/glib/glib-String-Utility-Functions.html#GStrv"><span class="type">GStrv</span></a></td>
+<td class="property_name"><a class="link" href="PkPackage.html#PkPackage--update-cve-urls" title="The “update-cve-urls” property">update-cve-urls</a></td>
+<td class="property_flags">Read / Write</td>
+</tr>
+<tr>
+<td class="property_type">
+<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *</td>
+<td class="property_name"><a class="link" href="PkPackage.html#PkPackage--update-issued" title="The “update-issued” property">update-issued</a></td>
+<td class="property_flags">Read / Write</td>
+</tr>
+<tr>
+<td class="property_type">
+<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *</td>
+<td class="property_name"><a class="link" href="PkPackage.html#PkPackage--update-obsoletes" title="The “update-obsoletes” property">update-obsoletes</a></td>
+<td class="property_flags">Read / Write</td>
+</tr>
+<tr>
+<td class="property_type"><a class="link" href="PackageKit-Enumerations.html#PkRestartEnum" title="enum PkRestartEnum"><span class="type">PkRestartEnum</span></a></td>
+<td class="property_name"><a class="link" href="PkPackage.html#PkPackage--update-restart" title="The “update-restart” property">update-restart</a></td>
+<td class="property_flags">Read / Write</td>
+</tr>
+<tr>
+<td class="property_type"><a class="link" href="PackageKit-Enumerations.html#PkUpdateStateEnum" title="enum PkUpdateStateEnum"><span class="type">PkUpdateStateEnum</span></a></td>
+<td class="property_name"><a class="link" href="PkPackage.html#PkPackage--update-state" title="The “update-state” property">update-state</a></td>
+<td class="property_flags">Read / Write</td>
+</tr>
+<tr>
+<td class="property_type">
+<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *</td>
+<td class="property_name"><a class="link" href="PkPackage.html#PkPackage--update-text" title="The “update-text” property">update-text</a></td>
+<td class="property_flags">Read / Write</td>
+</tr>
+<tr>
+<td class="property_type">
+<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *</td>
+<td class="property_name"><a class="link" href="PkPackage.html#PkPackage--update-updated" title="The “update-updated” property">update-updated</a></td>
+<td class="property_flags">Read / Write</td>
+</tr>
+<tr>
+<td class="property_type">
+<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *</td>
+<td class="property_name"><a class="link" href="PkPackage.html#PkPackage--update-updates" title="The “update-updates” property">update-updates</a></td>
+<td class="property_flags">Read / Write</td>
+</tr>
+<tr>
+<td class="property_type"><a href="/usr/share/gtk-doc/html/glib/glib-String-Utility-Functions.html#GStrv"><span class="type">GStrv</span></a></td>
+<td class="property_name"><a class="link" href="PkPackage.html#PkPackage--update-vendor-urls" title="The “update-vendor-urls” property">update-vendor-urls</a></td>
+<td class="property_flags">Read / Write</td>
+</tr>
+<tr>
+<td class="property_type">
+<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *</td>
+<td class="property_name"><a class="link" href="PkPackage.html#PkPackage--url" title="The “url” property">url</a></td>
+<td class="property_flags">Read / Write</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="refsect1">
+<a name="PkPackage.signals"></a><h2>Signals</h2>
+<div class="informaltable"><table class="informaltable" border="0">
+<colgroup>
+<col width="150px" class="signals_return">
+<col width="300px" class="signals_name">
+<col width="200px" class="signals_flags">
+</colgroup>
+<tbody><tr>
+<td class="signal_type"><span class="returnvalue">void</span></td>
+<td class="signal_name"><a class="link" href="PkPackage.html#PkPackage-changed" title="The “changed” signal">changed</a></td>
+<td class="signal_flags"><a href="/usr/share/gtk-doc/html/gobject/gobject-Signals.html#G-SIGNAL-RUN-LAST:CAPS">Run Last</a></td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="refsect1">
+<a name="PkPackage.other"></a><h2>Types and Values</h2>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="name">
+<col class="description">
+</colgroup>
+<tbody><tr>
+<td class="define_keyword">#define</td>
+<td class="function_name"><a class="link" href="PkPackage.html#PK-PACKAGE-TYPE-ERROR:CAPS" title="PK_PACKAGE_TYPE_ERROR">PK_PACKAGE_TYPE_ERROR</a></td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="refsect1">
+<a name="PkPackage.object-hierarchy"></a><h2>Object Hierarchy</h2>
+<pre class="screen">    <a href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GObject-struct">GObject</a>
+    <span class="lineart">╰──</span> <a class="link" href="PkSource.html" title="PkSource">PkSource</a>
+        <span class="lineart">╰──</span> PkPackage
+</pre>
+</div>
+<div class="refsect1">
+<a name="PkPackage.description"></a><h2>Description</h2>
+<p>This GObject represents a package from a transaction.
+These objects represent single items of data from the transaction, and are
+often present in lists (<a class="link" href="PkResults.html" title="PkResults"><span class="type">PkResults</span></a>) or just refcounted in client programs.</p>
+</div>
+<div class="refsect1">
+<a name="PkPackage.functions_details"></a><h2>Functions</h2>
+<div class="refsect2">
+<a name="pk-package-new"></a><h3>pk_package_new ()</h3>
+<pre class="programlisting"><a class="link" href="PkPackage.html" title="PkPackage"><span class="returnvalue">PkPackage</span></a> *
+pk_package_new (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
+<div class="refsect3">
+<a name="pk-package-new.returns"></a><h4>Returns</h4>
+<p> a new <a class="link" href="PkPackage.html" title="PkPackage"><span class="type">PkPackage</span></a> object.</p>
+</div>
+<p class="since">Since: <a class="link" href="api-index-0-5-4.html#api-index-0.5.4">0.5.4</a></p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="pk-package-set-id"></a><h3>pk_package_set_id ()</h3>
+<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>
+pk_package_set_id (<em class="parameter"><code><a class="link" href="PkPackage.html" title="PkPackage"><span class="type">PkPackage</span></a> *package</code></em>,
+                   <em class="parameter"><code>const <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *package_id</code></em>,
+                   <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
+<p>Sets the package object to have the given ID</p>
+<div class="refsect3">
+<a name="pk-package-set-id.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>package</p></td>
+<td class="parameter_description"><p>a valid <a class="link" href="PkPackage.html" title="PkPackage"><span class="type">PkPackage</span></a> instance</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>package_id</p></td>
+<td class="parameter_description"><p>the valid package_id</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>error</p></td>
+<td class="parameter_description"><p>a <a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> to put the error code and message in, or <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a></p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="refsect3">
+<a name="pk-package-set-id.returns"></a><h4>Returns</h4>
+<p> <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if the package_id was set</p>
+</div>
+<p class="since">Since: <a class="link" href="api-index-0-5-4.html#api-index-0.5.4">0.5.4</a></p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="pk-package-parse"></a><h3>pk_package_parse ()</h3>
+<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>
+pk_package_parse (<em class="parameter"><code><a class="link" href="PkPackage.html" title="PkPackage"><span class="type">PkPackage</span></a> *package</code></em>,
+                  <em class="parameter"><code>const <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *data</code></em>,
+                  <em class="parameter"><code><a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> **error</code></em>);</pre>
+<p>Parses the data to populate the <a class="link" href="PkPackage.html" title="PkPackage"><span class="type">PkPackage</span></a>.</p>
+<div class="refsect3">
+<a name="pk-package-parse.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>package</p></td>
+<td class="parameter_description"><p>a valid <a class="link" href="PkPackage.html" title="PkPackage"><span class="type">PkPackage</span></a> instance</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>data</p></td>
+<td class="parameter_description"><p>the data describing the package</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>error</p></td>
+<td class="parameter_description"><p>a <a href="/usr/share/gtk-doc/html/glib/glib-Error-Reporting.html#GError"><span class="type">GError</span></a> to put the error code and message in, or <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a></p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="refsect3">
+<a name="pk-package-parse.returns"></a><h4>Returns</h4>
+<p> <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if the data was parsed correcty</p>
+</div>
+<p class="since">Since: <a class="link" href="api-index-0-8-11.html#api-index-0.8.11">0.8.11</a></p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="pk-package-print"></a><h3>pk_package_print ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>
+pk_package_print (<em class="parameter"><code><a class="link" href="PkPackage.html" title="PkPackage"><span class="type">PkPackage</span></a> *package</code></em>);</pre>
+<p>Prints details about the package to standard out.</p>
+<div class="refsect3">
+<a name="pk-package-print.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody><tr>
+<td class="parameter_name"><p>package</p></td>
+<td class="parameter_description"><p>a valid <a class="link" href="PkPackage.html" title="PkPackage"><span class="type">PkPackage</span></a> instance</p></td>
+<td class="parameter_annotations"> </td>
+</tr></tbody>
+</table></div>
+</div>
+<p class="since">Since: <a class="link" href="api-index-0-5-4.html#api-index-0.5.4">0.5.4</a></p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="pk-package-equal"></a><h3>pk_package_equal ()</h3>
+<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>
+pk_package_equal (<em class="parameter"><code><a class="link" href="PkPackage.html" title="PkPackage"><span class="type">PkPackage</span></a> *package1</code></em>,
+                  <em class="parameter"><code><a class="link" href="PkPackage.html" title="PkPackage"><span class="type">PkPackage</span></a> *package2</code></em>);</pre>
+<p>Do the <a class="link" href="PkPackage.html" title="PkPackage"><span class="type">PkPackage</span></a>'s have the same ID.</p>
+<div class="refsect3">
+<a name="pk-package-equal.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>package1</p></td>
+<td class="parameter_description"><p>a valid <a class="link" href="PkPackage.html" title="PkPackage"><span class="type">PkPackage</span></a> instance</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>package2</p></td>
+<td class="parameter_description"><p>a valid <a class="link" href="PkPackage.html" title="PkPackage"><span class="type">PkPackage</span></a> instance</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="refsect3">
+<a name="pk-package-equal.returns"></a><h4>Returns</h4>
+<p> <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if the packages have the same package_id, info and summary.</p>
+</div>
+<p class="since">Since: <a class="link" href="api-index-0-5-4.html#api-index-0.5.4">0.5.4</a></p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="pk-package-equal-id"></a><h3>pk_package_equal_id ()</h3>
+<pre class="programlisting"><a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gboolean"><span class="returnvalue">gboolean</span></a>
+pk_package_equal_id (<em class="parameter"><code><a class="link" href="PkPackage.html" title="PkPackage"><span class="type">PkPackage</span></a> *package1</code></em>,
+                     <em class="parameter"><code><a class="link" href="PkPackage.html" title="PkPackage"><span class="type">PkPackage</span></a> *package2</code></em>);</pre>
+<p>Do the <a class="link" href="PkPackage.html" title="PkPackage"><span class="type">PkPackage</span></a>'s have the same ID.</p>
+<div class="refsect3">
+<a name="pk-package-equal-id.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>package1</p></td>
+<td class="parameter_description"><p>a valid <a class="link" href="PkPackage.html" title="PkPackage"><span class="type">PkPackage</span></a> instance</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>package2</p></td>
+<td class="parameter_description"><p>a valid <a class="link" href="PkPackage.html" title="PkPackage"><span class="type">PkPackage</span></a> instance</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="refsect3">
+<a name="pk-package-equal-id.returns"></a><h4>Returns</h4>
+<p> <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#TRUE:CAPS"><code class="literal">TRUE</code></a> if the packages have the same package_id.</p>
+</div>
+<p class="since">Since: <a class="link" href="api-index-0-5-4.html#api-index-0.5.4">0.5.4</a></p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="pk-package-get-id"></a><h3>pk_package_get_id ()</h3>
+<pre class="programlisting">const <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *
+pk_package_get_id (<em class="parameter"><code><a class="link" href="PkPackage.html" title="PkPackage"><span class="type">PkPackage</span></a> *package</code></em>);</pre>
+<p>Gets the package object ID</p>
+<div class="refsect3">
+<a name="pk-package-get-id.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody><tr>
+<td class="parameter_name"><p>package</p></td>
+<td class="parameter_description"><p>a valid <a class="link" href="PkPackage.html" title="PkPackage"><span class="type">PkPackage</span></a> instance</p></td>
+<td class="parameter_annotations"> </td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="refsect3">
+<a name="pk-package-get-id.returns"></a><h4>Returns</h4>
+<p> the ID, or <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if unset</p>
+</div>
+<p class="since">Since: <a class="link" href="api-index-0-5-4.html#api-index-0.5.4">0.5.4</a></p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="pk-package-get-info"></a><h3>pk_package_get_info ()</h3>
+<pre class="programlisting"><a class="link" href="PackageKit-Enumerations.html#PkInfoEnum" title="enum PkInfoEnum"><span class="returnvalue">PkInfoEnum</span></a>
+pk_package_get_info (<em class="parameter"><code><a class="link" href="PkPackage.html" title="PkPackage"><span class="type">PkPackage</span></a> *package</code></em>);</pre>
+<p>Gets the package object ID</p>
+<div class="refsect3">
+<a name="pk-package-get-info.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody><tr>
+<td class="parameter_name"><p>package</p></td>
+<td class="parameter_description"><p>a valid <a class="link" href="PkPackage.html" title="PkPackage"><span class="type">PkPackage</span></a> instance</p></td>
+<td class="parameter_annotations"> </td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="refsect3">
+<a name="pk-package-get-info.returns"></a><h4>Returns</h4>
+<p> the <a class="link" href="PackageKit-Enumerations.html#PkInfoEnum" title="enum PkInfoEnum"><span class="type">PkInfoEnum</span></a></p>
+</div>
+<p class="since">Since: <a class="link" href="api-index-0-5-4.html#api-index-0.5.4">0.5.4</a></p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="pk-package-set-info"></a><h3>pk_package_set_info ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>
+pk_package_set_info (<em class="parameter"><code><a class="link" href="PkPackage.html" title="PkPackage"><span class="type">PkPackage</span></a> *package</code></em>,
+                     <em class="parameter"><code><a class="link" href="PackageKit-Enumerations.html#PkInfoEnum" title="enum PkInfoEnum"><span class="type">PkInfoEnum</span></a> info</code></em>);</pre>
+<p>Sets the package info enum.</p>
+<div class="refsect3">
+<a name="pk-package-set-info.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>package</p></td>
+<td class="parameter_description"><p>a valid <a class="link" href="PkPackage.html" title="PkPackage"><span class="type">PkPackage</span></a> instance</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>info</p></td>
+<td class="parameter_description"><p>the <a class="link" href="PackageKit-Enumerations.html#PkInfoEnum" title="enum PkInfoEnum"><span class="type">PkInfoEnum</span></a></p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<p class="since">Since: <a class="link" href="api-index-0-8-14.html#api-index-0.8.14">0.8.14</a></p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="pk-package-get-summary"></a><h3>pk_package_get_summary ()</h3>
+<pre class="programlisting">const <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *
+pk_package_get_summary (<em class="parameter"><code><a class="link" href="PkPackage.html" title="PkPackage"><span class="type">PkPackage</span></a> *package</code></em>);</pre>
+<p>Gets the package object ID</p>
+<div class="refsect3">
+<a name="pk-package-get-summary.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody><tr>
+<td class="parameter_name"><p>package</p></td>
+<td class="parameter_description"><p>a valid <a class="link" href="PkPackage.html" title="PkPackage"><span class="type">PkPackage</span></a> instance</p></td>
+<td class="parameter_annotations"> </td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="refsect3">
+<a name="pk-package-get-summary.returns"></a><h4>Returns</h4>
+<p> the summary, or <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if unset</p>
+</div>
+<p class="since">Since: <a class="link" href="api-index-0-5-4.html#api-index-0.5.4">0.5.4</a></p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="pk-package-set-summary"></a><h3>pk_package_set_summary ()</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>
+pk_package_set_summary (<em class="parameter"><code><a class="link" href="PkPackage.html" title="PkPackage"><span class="type">PkPackage</span></a> *package</code></em>,
+                        <em class="parameter"><code>const <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *summary</code></em>);</pre>
+<p>Sets the package summary.</p>
+<div class="refsect3">
+<a name="pk-package-set-summary.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>package</p></td>
+<td class="parameter_description"><p>a valid <a class="link" href="PkPackage.html" title="PkPackage"><span class="type">PkPackage</span></a> instance</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>summary</p></td>
+<td class="parameter_description"><p>the package summary</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<p class="since">Since: <a class="link" href="api-index-0-8-14.html#api-index-0.8.14">0.8.14</a></p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="pk-package-get-name"></a><h3>pk_package_get_name ()</h3>
+<pre class="programlisting">const <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *
+pk_package_get_name (<em class="parameter"><code><a class="link" href="PkPackage.html" title="PkPackage"><span class="type">PkPackage</span></a> *package</code></em>);</pre>
+<p>Gets the package name.</p>
+<div class="refsect3">
+<a name="pk-package-get-name.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody><tr>
+<td class="parameter_name"><p>package</p></td>
+<td class="parameter_description"><p>a valid <a class="link" href="PkPackage.html" title="PkPackage"><span class="type">PkPackage</span></a> instance</p></td>
+<td class="parameter_annotations"> </td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="refsect3">
+<a name="pk-package-get-name.returns"></a><h4>Returns</h4>
+<p> the name, or <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if unset</p>
+</div>
+<p class="since">Since: <a class="link" href="api-index-0-6-4.html#api-index-0.6.4">0.6.4</a></p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="pk-package-get-version"></a><h3>pk_package_get_version ()</h3>
+<pre class="programlisting">const <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *
+pk_package_get_version (<em class="parameter"><code><a class="link" href="PkPackage.html" title="PkPackage"><span class="type">PkPackage</span></a> *package</code></em>);</pre>
+<p>Gets the package version.</p>
+<div class="refsect3">
+<a name="pk-package-get-version.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody><tr>
+<td class="parameter_name"><p>package</p></td>
+<td class="parameter_description"><p>a valid <a class="link" href="PkPackage.html" title="PkPackage"><span class="type">PkPackage</span></a> instance</p></td>
+<td class="parameter_annotations"> </td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="refsect3">
+<a name="pk-package-get-version.returns"></a><h4>Returns</h4>
+<p> the version, or <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if unset</p>
+</div>
+<p class="since">Since: <a class="link" href="api-index-0-6-4.html#api-index-0.6.4">0.6.4</a></p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="pk-package-get-arch"></a><h3>pk_package_get_arch ()</h3>
+<pre class="programlisting">const <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *
+pk_package_get_arch (<em class="parameter"><code><a class="link" href="PkPackage.html" title="PkPackage"><span class="type">PkPackage</span></a> *package</code></em>);</pre>
+<p>Gets the package arch.</p>
+<div class="refsect3">
+<a name="pk-package-get-arch.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody><tr>
+<td class="parameter_name"><p>package</p></td>
+<td class="parameter_description"><p>a valid <a class="link" href="PkPackage.html" title="PkPackage"><span class="type">PkPackage</span></a> instance</p></td>
+<td class="parameter_annotations"> </td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="refsect3">
+<a name="pk-package-get-arch.returns"></a><h4>Returns</h4>
+<p> the arch, or <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if unset</p>
+</div>
+<p class="since">Since: <a class="link" href="api-index-0-6-4.html#api-index-0.6.4">0.6.4</a></p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="pk-package-get-data"></a><h3>pk_package_get_data ()</h3>
+<pre class="programlisting">const <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="returnvalue">gchar</span></a> *
+pk_package_get_data (<em class="parameter"><code><a class="link" href="PkPackage.html" title="PkPackage"><span class="type">PkPackage</span></a> *package</code></em>);</pre>
+<p>Gets the package data, which is usually the repository ID that contains the
+package. Special ID's include "installed" for installed packages, and "local"
+for local packages that exist on disk but not in a repository.</p>
+<div class="refsect3">
+<a name="pk-package-get-data.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody><tr>
+<td class="parameter_name"><p>package</p></td>
+<td class="parameter_description"><p>a valid <a class="link" href="PkPackage.html" title="PkPackage"><span class="type">PkPackage</span></a> instance</p></td>
+<td class="parameter_annotations"> </td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="refsect3">
+<a name="pk-package-get-data.returns"></a><h4>Returns</h4>
+<p> the data, or <a href="/usr/share/gtk-doc/html/glib/glib-Standard-Macros.html#NULL:CAPS"><code class="literal">NULL</code></a> if unset</p>
+</div>
+<p class="since">Since: <a class="link" href="api-index-0-6-4.html#api-index-0.6.4">0.6.4</a></p>
+</div>
+</div>
+<div class="refsect1">
+<a name="PkPackage.other_details"></a><h2>Types and Values</h2>
+<div class="refsect2">
+<a name="PK-PACKAGE-TYPE-ERROR:CAPS"></a><h3>PK_PACKAGE_TYPE_ERROR</h3>
+<pre class="programlisting">#define PK_PACKAGE_TYPE_ERROR (pk_package_error_get_type ())
+</pre>
+</div>
+</div>
+<div class="refsect1">
+<a name="PkPackage.property-details"></a><h2>Property Details</h2>
+<div class="refsect2">
+<a name="PkPackage--description"></a><h3>The <code class="literal">“description”</code> property</h3>
+<pre class="programlisting">  “description”              <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *</pre>
+<p>The package description.</p>
+<p>Flags: Read / Write</p>
+<p>Default value: NULL</p>
+<p class="since">Since: <a class="link" href="api-index-0-5-4.html#api-index-0.5.4">0.5.4</a></p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="PkPackage--group"></a><h3>The <code class="literal">“group”</code> property</h3>
+<pre class="programlisting">  “group”                    <a class="link" href="PackageKit-Enumerations.html#PkGroupEnum" title="enum PkGroupEnum"><span class="type">PkGroupEnum</span></a></pre>
+<p>The package group.</p>
+<p>Flags: Read / Write</p>
+<p>Default value: PK_GROUP_ENUM_UNKNOWN</p>
+<p class="since">Since: <a class="link" href="api-index-0-5-4.html#api-index-0.5.4">0.5.4</a></p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="PkPackage--info"></a><h3>The <code class="literal">“info”</code> property</h3>
+<pre class="programlisting">  “info”                     <a class="link" href="PackageKit-Enumerations.html#PkInfoEnum" title="enum PkInfoEnum"><span class="type">PkInfoEnum</span></a></pre>
+<p>The PkInfoEnum package type, e.g. PK_INFO_ENUM_NORMAL.</p>
+<p>Flags: Read / Write</p>
+<p>Default value: PK_INFO_ENUM_UNKNOWN</p>
+<p class="since">Since: <a class="link" href="api-index-0-5-4.html#api-index-0.5.4">0.5.4</a></p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="PkPackage--license"></a><h3>The <code class="literal">“license”</code> property</h3>
+<pre class="programlisting">  “license”                  <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *</pre>
+<p>The package license.</p>
+<p>Flags: Read / Write</p>
+<p>Default value: NULL</p>
+<p class="since">Since: <a class="link" href="api-index-0-5-4.html#api-index-0.5.4">0.5.4</a></p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="PkPackage--package-id"></a><h3>The <code class="literal">“package-id”</code> property</h3>
+<pre class="programlisting">  “package-id”               <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *</pre>
+<p>The full package_id, e.g. 'gnome-power-manager;0.1.2;i386;fedora'.</p>
+<p>Flags: Read</p>
+<p>Default value: NULL</p>
+<p class="since">Since: <a class="link" href="api-index-0-5-4.html#api-index-0.5.4">0.5.4</a></p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="PkPackage--size"></a><h3>The <code class="literal">“size”</code> property</h3>
+<pre class="programlisting">  “size”                     <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#guint64"><span class="type">guint64</span></a></pre>
+<p>The package size.</p>
+<p>Flags: Read / Write</p>
+<p>Default value: 0</p>
+<p class="since">Since: <a class="link" href="api-index-0-5-4.html#api-index-0.5.4">0.5.4</a></p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="PkPackage--summary"></a><h3>The <code class="literal">“summary”</code> property</h3>
+<pre class="programlisting">  “summary”                  <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *</pre>
+<p>The package summary.</p>
+<p>Flags: Read / Write</p>
+<p>Default value: NULL</p>
+<p class="since">Since: <a class="link" href="api-index-0-5-4.html#api-index-0.5.4">0.5.4</a></p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="PkPackage--update-bugzilla-urls"></a><h3>The <code class="literal">“update-bugzilla-urls”</code> property</h3>
+<pre class="programlisting">  “update-bugzilla-urls”     <a href="/usr/share/gtk-doc/html/glib/glib-String-Utility-Functions.html#GStrv"><span class="type">GStrv</span></a></pre>
+<p>The update bugzilla URLs.</p>
+<p>Flags: Read / Write</p>
+<p class="since">Since: <a class="link" href="api-index-0-8-1.html#api-index-0.8.1">0.8.1</a></p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="PkPackage--update-changelog"></a><h3>The <code class="literal">“update-changelog”</code> property</h3>
+<pre class="programlisting">  “update-changelog”         <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *</pre>
+<p>The update ChangeLog.</p>
+<p>Flags: Read / Write</p>
+<p>Default value: NULL</p>
+<p class="since">Since: <a class="link" href="api-index-0-5-4.html#api-index-0.5.4">0.5.4</a></p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="PkPackage--update-cve-urls"></a><h3>The <code class="literal">“update-cve-urls”</code> property</h3>
+<pre class="programlisting">  “update-cve-urls”          <a href="/usr/share/gtk-doc/html/glib/glib-String-Utility-Functions.html#GStrv"><span class="type">GStrv</span></a></pre>
+<p>The update CVE URLs.</p>
+<p>Flags: Read / Write</p>
+<p class="since">Since: <a class="link" href="api-index-0-8-1.html#api-index-0.8.1">0.8.1</a></p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="PkPackage--update-issued"></a><h3>The <code class="literal">“update-issued”</code> property</h3>
+<pre class="programlisting">  “update-issued”            <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *</pre>
+<p>When the update was issued.</p>
+<p>Flags: Read / Write</p>
+<p>Default value: NULL</p>
+<p class="since">Since: <a class="link" href="api-index-0-5-4.html#api-index-0.5.4">0.5.4</a></p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="PkPackage--update-obsoletes"></a><h3>The <code class="literal">“update-obsoletes”</code> property</h3>
+<pre class="programlisting">  “update-obsoletes”         <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *</pre>
+<p>The update packages that are obsoleted.</p>
+<p>Flags: Read / Write</p>
+<p>Default value: NULL</p>
+<p class="since">Since: <a class="link" href="api-index-0-5-4.html#api-index-0.5.4">0.5.4</a></p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="PkPackage--update-restart"></a><h3>The <code class="literal">“update-restart”</code> property</h3>
+<pre class="programlisting">  “update-restart”           <a class="link" href="PackageKit-Enumerations.html#PkRestartEnum" title="enum PkRestartEnum"><span class="type">PkRestartEnum</span></a></pre>
+<p>The update restart type.</p>
+<p>Flags: Read / Write</p>
+<p>Default value: PK_RESTART_ENUM_UNKNOWN</p>
+<p class="since">Since: <a class="link" href="api-index-0-5-4.html#api-index-0.5.4">0.5.4</a></p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="PkPackage--update-state"></a><h3>The <code class="literal">“update-state”</code> property</h3>
+<pre class="programlisting">  “update-state”             <a class="link" href="PackageKit-Enumerations.html#PkUpdateStateEnum" title="enum PkUpdateStateEnum"><span class="type">PkUpdateStateEnum</span></a></pre>
+<p>The update state.</p>
+<p>Flags: Read / Write</p>
+<p>Default value: PK_UPDATE_STATE_ENUM_UNKNOWN</p>
+<p class="since">Since: <a class="link" href="api-index-0-5-4.html#api-index-0.5.4">0.5.4</a></p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="PkPackage--update-text"></a><h3>The <code class="literal">“update-text”</code> property</h3>
+<pre class="programlisting">  “update-text”              <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *</pre>
+<p>The update description.</p>
+<p>Flags: Read / Write</p>
+<p>Default value: NULL</p>
+<p class="since">Since: <a class="link" href="api-index-0-5-4.html#api-index-0.5.4">0.5.4</a></p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="PkPackage--update-updated"></a><h3>The <code class="literal">“update-updated”</code> property</h3>
+<pre class="programlisting">  “update-updated”           <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *</pre>
+<p>When the update was last updated.</p>
+<p>Flags: Read / Write</p>
+<p>Default value: NULL</p>
+<p class="since">Since: <a class="link" href="api-index-0-5-4.html#api-index-0.5.4">0.5.4</a></p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="PkPackage--update-updates"></a><h3>The <code class="literal">“update-updates”</code> property</h3>
+<pre class="programlisting">  “update-updates”           <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *</pre>
+<p>The update packages.</p>
+<p>Flags: Read / Write</p>
+<p>Default value: NULL</p>
+<p class="since">Since: <a class="link" href="api-index-0-5-4.html#api-index-0.5.4">0.5.4</a></p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="PkPackage--update-vendor-urls"></a><h3>The <code class="literal">“update-vendor-urls”</code> property</h3>
+<pre class="programlisting">  “update-vendor-urls”       <a href="/usr/share/gtk-doc/html/glib/glib-String-Utility-Functions.html#GStrv"><span class="type">GStrv</span></a></pre>
+<p>The update vendor URLs.</p>
+<p>Flags: Read / Write</p>
+<p class="since">Since: <a class="link" href="api-index-0-8-1.html#api-index-0.8.1">0.8.1</a></p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="PkPackage--url"></a><h3>The <code class="literal">“url”</code> property</h3>
+<pre class="programlisting">  “url”                      <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *</pre>
+<p>The package homepage URL.</p>
+<p>Flags: Read / Write</p>
+<p>Default value: NULL</p>
+<p class="since">Since: <a class="link" href="api-index-0-5-4.html#api-index-0.5.4">0.5.4</a></p>
+</div>
+</div>
+<div class="refsect1">
+<a name="PkPackage.signal-details"></a><h2>Signal Details</h2>
+<div class="refsect2">
+<a name="PkPackage-changed"></a><h3>The <code class="literal">“changed”</code> signal</h3>
+<pre class="programlisting"><span class="returnvalue">void</span>
+user_function (<a class="link" href="PkPackage.html" title="PkPackage"><span class="type">PkPackage</span></a> *package,
+               <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gpointer"><span class="type">gpointer</span></a>   user_data)</pre>
+<p>The ::changed signal is emitted when the package data may have changed.</p>
+<div class="refsect3">
+<a name="PkPackage-changed.parameters"></a><h4>Parameters</h4>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="parameters_name">
+<col class="parameters_description">
+<col width="200px" class="parameters_annotations">
+</colgroup>
+<tbody>
+<tr>
+<td class="parameter_name"><p>package</p></td>
+<td class="parameter_description"><p>the <a class="link" href="PkPackage.html" title="PkPackage"><span class="type">PkPackage</span></a> instance that emitted the signal</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+<tr>
+<td class="parameter_name"><p>user_data</p></td>
+<td class="parameter_description"><p>user data set when the signal handler was connected.</p></td>
+<td class="parameter_annotations"> </td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<p>Flags: <a href="/usr/share/gtk-doc/html/gobject/gobject-Signals.html#G-SIGNAL-RUN-LAST:CAPS">Run Last</a></p>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>Generated by GTK-Doc V1.28</div>
+</body>
+</html>

@@ -1,0 +1,9 @@
+--- a/etc/Vendor.conf	2018-05-01 12:51:22.873529546 -0600
++++ b/etc/Vendor.conf	2018-05-01 12:56:18.891327096 -0600
+@@ -49,5 +49,5 @@
+ # default=none
+ MimeUrl=none
+ 
+-VendorName=Scientific Linux
++VendorName=EuroLinux
+ VendorIcon=fedora-logo-small

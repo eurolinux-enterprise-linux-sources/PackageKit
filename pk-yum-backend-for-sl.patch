@@ -1,0 +1,53 @@
+diff --git a/backends/yum/yumBackend.py b/backends/yum/yumBackend.py
+index 4e0e5f4..911fbea 100755
+--- a/backends/yum/yumBackend.py
++++ b/backends/yum/yumBackend.py
+@@ -45,6 +45,8 @@ from yum.misc import prco_tuple_to_string, unique
+ from yum.packages import YumLocalPackage, parsePackages
+ from yum.packageSack import MetaSack
+ from yum.Errors import YumBaseError
++from distutils.version import StrictVersion
++import platform
+ import rpmUtils
+ import exceptions
+ import types
+@@ -2591,16 +2593,22 @@ class PackageKitYumBackend(PackageKitBaseBackend, PackagekitPackage):
+ 
+         # parse the releases file
+         config = ConfigParser.ConfigParser()
+-        config.read('/usr/share/preupgrade/releases.list')
++        try:
++            grabber = URLGrabber()
++            configdata = grabber.urlopen("http://ftp.scientificlinux.org/linux/scientific/7x/releases.txt")
++        except URLGrabError:
++            configdata = grabber.urlopen('/usr/share/preupgrade/releases.list')
++
++        config.readfp(configdata)
+ 
+         # find the newest release
+         newest = None
+-        last_version = 0
++        last_version = 0.1
+         for section in config.sections():
+             # we only care about stable versions
+             if config.has_option(section, 'stable') and config.getboolean(section, 'stable'):
+-                version = config.getfloat(section, 'version')
+-                if (version > last_version):
++                version = config.get(section, 'version')
++                if (StrictVersion(str(version)) > StrictVersion(str(last_version))):
+                     newest = section
+                     last_version = version
+ 
+@@ -2610,10 +2618,10 @@ class PackageKitYumBackend(PackageKitBaseBackend, PackagekitPackage):
+ 
+         # are we already on the latest version
+         try:
+-            present_version = float(self.yumbase.conf.yumvar['releasever'])
++            present_version = str(platform.linux_distribution()[1])
+         except Exception, e:
+             self.error(ERROR_INTERNAL_ERROR, _format_str(traceback.format_exc()))
+-        if (present_version >= last_version):
++        if (StrictVersion(str(present_version)) >= StrictVersion(str(last_version))):
+             return
+ 
+         # if we have an upgrade candidate then pass back data to daemon

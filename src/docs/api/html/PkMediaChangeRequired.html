@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>PkMediaChangeRequired: PackageKit Reference Manual</title>
+<meta name="generator" content="DocBook XSL Stylesheets Vsnapshot">
+<link rel="home" href="index.html" title="PackageKit Reference Manual">
+<link rel="up" href="lpackagekit-glib2.html" title="packagekit-glib2">
+<link rel="prev" href="PkItemProgress.html" title="PkItemProgress">
+<link rel="next" href="PkPackageSack.html" title="PkPackageSack">
+<meta name="generator" content="GTK-Doc V1.28 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="5"><tr valign="middle">
+<td width="100%" align="left" class="shortcuts">
+<a href="#" class="shortcut">Top</a><span id="nav_description">  <span class="dim">|</span> 
+                  <a href="#PkMediaChangeRequired.description" class="shortcut">Description</a></span><span id="nav_hierarchy">  <span class="dim">|</span> 
+                  <a href="#PkMediaChangeRequired.object-hierarchy" class="shortcut">Object Hierarchy</a></span><span id="nav_properties">  <span class="dim">|</span> 
+                  <a href="#PkMediaChangeRequired.properties" class="shortcut">Properties</a></span>
+</td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="16" height="16" border="0" alt="Home"></a></td>
+<td><a accesskey="u" href="lpackagekit-glib2.html"><img src="up.png" width="16" height="16" border="0" alt="Up"></a></td>
+<td><a accesskey="p" href="PkItemProgress.html"><img src="left.png" width="16" height="16" border="0" alt="Prev"></a></td>
+<td><a accesskey="n" href="PkPackageSack.html"><img src="right.png" width="16" height="16" border="0" alt="Next"></a></td>
+</tr></table>
+<div class="refentry">
+<a name="PkMediaChangeRequired"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="PkMediaChangeRequired.top_of_page"></a>PkMediaChangeRequired</span></h2>
+<p>PkMediaChangeRequired — MediaChangeRequired object</p>
+</td>
+<td class="gallery_image" valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsect1">
+<a name="PkMediaChangeRequired.functions"></a><h2>Functions</h2>
+<div class="informaltable"><table class="informaltable" width="100%" border="0">
+<colgroup>
+<col width="150px" class="functions_return">
+<col class="functions_name">
+</colgroup>
+<tbody><tr>
+<td class="function_type">
+<a class="link" href="PkMediaChangeRequired.html" title="PkMediaChangeRequired"><span class="returnvalue">PkMediaChangeRequired</span></a> *
+</td>
+<td class="function_name">
+<a class="link" href="PkMediaChangeRequired.html#pk-media-change-required-new" title="pk_media_change_required_new ()">pk_media_change_required_new</a> <span class="c_punctuation">()</span>
+</td>
+</tr></tbody>
+</table></div>
+</div>
+<div class="refsect1">
+<a name="PkMediaChangeRequired.properties"></a><h2>Properties</h2>
+<div class="informaltable"><table class="informaltable" border="0">
+<colgroup>
+<col width="150px" class="properties_type">
+<col width="300px" class="properties_name">
+<col width="200px" class="properties_flags">
+</colgroup>
+<tbody>
+<tr>
+<td class="property_type">
+<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *</td>
+<td class="property_name"><a class="link" href="PkMediaChangeRequired.html#PkMediaChangeRequired--media-id" title="The “media-id” property">media-id</a></td>
+<td class="property_flags">Read / Write</td>
+</tr>
+<tr>
+<td class="property_type">
+<a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *</td>
+<td class="property_name"><a class="link" href="PkMediaChangeRequired.html#PkMediaChangeRequired--media-text" title="The “media-text” property">media-text</a></td>
+<td class="property_flags">Read / Write</td>
+</tr>
+<tr>
+<td class="property_type"><a class="link" href="PackageKit-Enumerations.html#PkMediaTypeEnum" title="enum PkMediaTypeEnum"><span class="type">PkMediaTypeEnum</span></a></td>
+<td class="property_name"><a class="link" href="PkMediaChangeRequired.html#PkMediaChangeRequired--media-type" title="The “media-type” property">media-type</a></td>
+<td class="property_flags">Read / Write</td>
+</tr>
+</tbody>
+</table></div>
+</div>
+<div class="refsect1">
+<a name="PkMediaChangeRequired.object-hierarchy"></a><h2>Object Hierarchy</h2>
+<pre class="screen">    <a href="/usr/share/gtk-doc/html/gobject/gobject-The-Base-Object-Type.html#GObject-struct">GObject</a>
+    <span class="lineart">╰──</span> <a class="link" href="PkSource.html" title="PkSource">PkSource</a>
+        <span class="lineart">╰──</span> PkMediaChangeRequired
+</pre>
+</div>
+<div class="refsect1">
+<a name="PkMediaChangeRequired.description"></a><h2>Description</h2>
+<p>This GObject represents a media_change_required from a transaction.
+These objects represent single items of data from the transaction, and are
+often present in lists (<a class="link" href="PkResults.html" title="PkResults"><span class="type">PkResults</span></a>) or just refcounted in client programs.</p>
+</div>
+<div class="refsect1">
+<a name="PkMediaChangeRequired.functions_details"></a><h2>Functions</h2>
+<div class="refsect2">
+<a name="pk-media-change-required-new"></a><h3>pk_media_change_required_new ()</h3>
+<pre class="programlisting"><a class="link" href="PkMediaChangeRequired.html" title="PkMediaChangeRequired"><span class="returnvalue">PkMediaChangeRequired</span></a> *
+pk_media_change_required_new (<em class="parameter"><code><span class="type">void</span></code></em>);</pre>
+<div class="refsect3">
+<a name="pk-media-change-required-new.returns"></a><h4>Returns</h4>
+<p> a new <a class="link" href="PkMediaChangeRequired.html" title="PkMediaChangeRequired"><span class="type">PkMediaChangeRequired</span></a> object.</p>
+</div>
+<p class="since">Since: <a class="link" href="api-index-0-5-4.html#api-index-0.5.4">0.5.4</a></p>
+</div>
+</div>
+<div class="refsect1">
+<a name="PkMediaChangeRequired.other_details"></a><h2>Types and Values</h2>
+</div>
+<div class="refsect1">
+<a name="PkMediaChangeRequired.property-details"></a><h2>Property Details</h2>
+<div class="refsect2">
+<a name="PkMediaChangeRequired--media-id"></a><h3>The <code class="literal">“media-id”</code> property</h3>
+<pre class="programlisting">  “media-id”                 <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *</pre>
+<p>Flags: Read / Write</p>
+<p>Default value: NULL</p>
+<p class="since">Since: <a class="link" href="api-index-0-5-4.html#api-index-0.5.4">0.5.4</a></p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="PkMediaChangeRequired--media-text"></a><h3>The <code class="literal">“media-text”</code> property</h3>
+<pre class="programlisting">  “media-text”               <a href="/usr/share/gtk-doc/html/glib/glib-Basic-Types.html#gchar"><span class="type">gchar</span></a> *</pre>
+<p>Flags: Read / Write</p>
+<p>Default value: NULL</p>
+<p class="since">Since: <a class="link" href="api-index-0-5-4.html#api-index-0.5.4">0.5.4</a></p>
+</div>
+<hr>
+<div class="refsect2">
+<a name="PkMediaChangeRequired--media-type"></a><h3>The <code class="literal">“media-type”</code> property</h3>
+<pre class="programlisting">  “media-type”               <a class="link" href="PackageKit-Enumerations.html#PkMediaTypeEnum" title="enum PkMediaTypeEnum"><span class="type">PkMediaTypeEnum</span></a></pre>
+<p>Flags: Read / Write</p>
+<p>Default value: PK_MEDIA_TYPE_ENUM_UNKNOWN</p>
+<p class="since">Since: <a class="link" href="api-index-0-5-4.html#api-index-0.5.4">0.5.4</a></p>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>Generated by GTK-Doc V1.28</div>
+</body>
+</html>
